@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -7,6 +7,12 @@ export class AppController {
 
 	@Post('/insertData')
 	async insertData() {
-		return await this.appService.mergeAttributes()
+		// const x = await this.appService.getQuery()
+		// console.log(x.length)
+		// return x
+	}
+	@Post('/getProduct')
+	async getprd(@Body() body){
+		return this.appService.getQuery(body)
 	}
 }

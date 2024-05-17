@@ -78,3 +78,48 @@ export class ProductMetadata{
     updated_at?: Date
 
 }
+
+@Entity()
+export class CategoryAttributeMapping{
+    @PrimaryColumn()
+    category_id:number
+
+    @Column({array:true})
+    attributes:string
+}
+
+@Entity()
+export class AttributeSetOfValues{
+    @PrimaryColumn()
+    attribute:string
+
+    @Column({array:true})
+    values:string
+}
+
+export class productdatadto{
+    category_id:number
+    tenant_id:string
+    org_id:string
+    code:string
+    product_name:string
+    product_data:Object
+    variant_data:Object
+    variant_dependent_data:Object
+}
+
+export class productmetadatadto  {
+    parent_pdm_id:number
+    category_id:number
+    tenant_id:string
+    org_id:string
+    other_variant:number[]
+    status?:boolean
+    classification:string
+    completion_percentage?:number
+    variant_count?:number
+    variant_published?:boolean
+    variant_deleted?:boolean
+    created_at?:Date
+    updated_at?:Date
+}

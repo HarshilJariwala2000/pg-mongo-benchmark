@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductData, ProductMetadata } from './entity';
+import { CategoryAttributeMapping, ProductData, ProductMetadata,AttributeSetOfValues } from './entity';
+import { MongoModule } from './modules/mongo/mongo.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
     imports: [
@@ -13,10 +15,12 @@ import { ProductData, ProductMetadata } from './entity';
 			username: 'postgres',
 			password:'pass',
 			database: 'governance_json',
-			entities: [ProductData, ProductMetadata],
+			entities: [ProductData, ProductMetadata, CategoryAttributeMapping, AttributeSetOfValues],
 			synchronize: true,
 		}),
-		TypeOrmModule.forFeature([ProductData, ProductMetadata])
+		TypeOrmModule.forFeature([ProductData, ProductMetadata, CategoryAttributeMapping, AttributeSetOfValues]),
+		MongoModule,
+		MongooseModule.forRoot('mongodb://localhost:27017/test'),
   	],
     controllers: [AppController],
     providers: [AppService],
